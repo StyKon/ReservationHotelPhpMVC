@@ -1,0 +1,16 @@
+{
+    "name": "khali/php-mvc-master",
+    "description": "New MVC ReservationHotel",
+    "type": "project",
+    "license": "StyKon",
+    "authors": [
+        {
+            "name": "StyKon",
+            "email": "76910363+StyKon@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
