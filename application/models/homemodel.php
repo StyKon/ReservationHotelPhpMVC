@@ -14,11 +14,11 @@ class HomeModel
         }
     }
 
-    public function getRecherche()
+    public function getRecherche($NbPersonne,$etat,$vil,$cat,$p1,$p2,$p3,$p4)
     {
-        $sql = "SELECT hotels.Id_Hotel, hotels.Id_Category, hotels.Id_Ville, hotels.Nom,
-         villes.Nom AS NomVille, chambres.Prix *:NbPersonne AS PrixTot,
-         categories.Type, images.Path, count(CASE WHEN chambres.NbPlace = '1' THEN 1 END)
+        $sql = "SELECT hotels.Id_Hotel, hotels.Id_Category, hotels.Id_Ville, hotels.NomHotel,
+         villes.NomVille, chambres.Prix *:NbPersonne AS PrixTot,
+         categories.TypeCat, images.PathImage, count(CASE WHEN chambres.NbPlace = '1' THEN 1 END)
          AS count1, count(CASE WHEN chambres.NbPlace = '2' THEN 1 END)
          AS count2, count(CASE WHEN chambres.NbPlace = '3' THEN 1 END) 
          AS count3, count(CASE WHEN chambres.NbPlace = '4' THEN 1 END)
@@ -36,9 +36,18 @@ class HomeModel
         $query = $this
             ->db
             ->prepare($sql);
-        $query->execute();
+            $query->execute(array(
+                ':NbPersonne' => $NbPersonne,
+                ':etat' => $etat,
+                ':vil' => $vil,
+                ':cat' => $cat,
+                ':p1' => $p1,
+                ':p2' => $p2,
+                ':p3' => $p3,
+                ':p4' => $p4
+            ));
 
-        return $query->fetchAll();
+        return $query->fetchAll();//(PDO::FETCH_OBJ);
     }
   
 

@@ -72,7 +72,7 @@ class Home extends Controller
             {
                 $p4 = array_count_values($new) [4];
             }
-            //LOAD MODEL AND GET SEARCH
+           
             $NbCh = array(
                 "NbCh1P" => $p1,
                 "NbCh2P" => $p2,
@@ -91,10 +91,10 @@ class Home extends Controller
                 "DateDebut" => $DateDebut,
                 "DateFin" => $DateFin
             );
-            print_r($Nb);
-            print_r($NbCh);
-            echo ($cat);
-            echo ($vil);
+            //LOAD MODEL AND GET SEARCH
+            $homes_model = $this->loadModel('HomeModel');
+            $hotels = $homes_model->getRecherche($NbPersonne,$etat,$vil,$cat,$p1,$p2,$p3,$p4);
+            print_r($hotels);
         }
         /*  $villes = DB::table('villes')->get();
            $categorys = DB::table('categories')->get();
