@@ -41,9 +41,6 @@ class Home extends Controller
             $name = $_POST["name"];
             $adult = $_POST["adult"];
             $kids = $_POST["kids"];
-            print_r($name);
-            print_r($adult);
-            print_r($kids);
 
             for ($i = 0;$i < count($name);$i++)
             {
@@ -92,7 +89,6 @@ class Home extends Controller
             );
             $homes_model = $this->loadModel('HomeModel');
             $hotels = $homes_model->getRecherche($NbPersonne, $etat, $vil, $cat, $p1, $p2, $p3, $p4);
-            print_r($hotels);
             $villes = $homes_model->getAllVilles();
             $categorys = $homes_model->getAllCategorys();
             require 'application/views/home/index.php';
@@ -144,14 +140,7 @@ class Home extends Controller
             $Ch4 = $homes_model->UpdateChambreP($Chambre4Id);
             $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre4Id);
         }
-
-        /*
-        return redirect()->route('welcome')
-        ->with('success', 'Reservation Done!!');
-        /*
-                  if authen name_user _ adr _ tel
         
-        $request->session()->put('reservation', $table_id); */
     }
 
 }
