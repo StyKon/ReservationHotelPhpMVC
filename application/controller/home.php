@@ -1,8 +1,7 @@
 <?php
-
 class Home extends Controller
 {
-   
+
     public function index()
     {
         session_start();
@@ -14,13 +13,11 @@ class Home extends Controller
         require 'application/views/home/index.php';
     }
 
-  
     public function inscription()
     {
         require 'application/views/home/inscription.php';
     }
 
-   
     public function myreservation()
     {
         require 'application/views/home/myreservation.php';
@@ -75,7 +72,7 @@ class Home extends Controller
             {
                 $p4 = array_count_values($new) [4];
             }
-           
+
             $NbCh = array(
                 "NbCh1P" => $p1,
                 "NbCh2P" => $p2,
@@ -94,23 +91,23 @@ class Home extends Controller
                 "DateDebut" => $DateDebut,
                 "DateFin" => $DateFin
             );
-            //LOAD MODEL AND GET SEARCH
             $homes_model = $this->loadModel('HomeModel');
-            $hotels = $homes_model->getRecherche($NbPersonne,$etat,$vil,$cat,$p1,$p2,$p3,$p4);
+            $hotels = $homes_model->getRecherche($NbPersonne, $etat, $vil, $cat, $p1, $p2, $p3, $p4);
             print_r($hotels);
-        }
-        /*  $villes = DB::table('villes')->get();
-           $categorys = DB::table('categories')->get();
-           return view('User.welcome',compact('hotels','villes','categorys','NbCh','Nb'));
-        }else{
-        $villes = DB::table('villes')->get();
-        $categorys = DB::table('categories')->get();
-        return view ('User.welcome',compact('villes','categorys'));
-        }
-        
-        */
 
-        require 'application/views/home/index.php';
+            $homes_model = $this->loadModel('HomeModel');
+            $villes = $homes_model->getAllVilles();
+            $categorys = $homes_model->getAllCategorys();
+            require 'application/views/home/index.php';
+        }
+        else
+        {
+            $homes_model = $this->loadModel('HomeModel');
+            $villes = $homes_model->getAllVilles();
+            $categorys = $homes_model->getAllCategorys();
+            require 'application/views/home/index.php';
+        }
+
     }
 
 }
