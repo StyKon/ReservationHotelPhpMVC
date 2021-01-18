@@ -94,15 +94,15 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="#top">Top</a></li>
                             <li><a href="#down">Down</a></li>
-                            @if(session()->has('ClientLogin'))
-                            <li><a href="/myreservation" >My Reservation</a></li>
+                        <!--    @if(session()->has('ClientLogin')) -->
+                           <!-- <li><a href="/myreservation" >My Reservation</a></li>
                             <li><a href="/LogoutClient" class="btn btn-round btn-default">Logout</a></li>
-
-                            @else
+-->
+                          <!--  @else-->
                             <li><a href="/inscription" class="btn btn-round btn-default">Register</a></li>
                             <li><a href="/login" class="btn btn-round btn-default">Login</a></li>
 
-                            @endif
+                          <!--  @endif-->
                         </ul>
 
                     </div><!-- /.navbar-collapse -->
@@ -122,7 +122,7 @@
 
     </div>
 <div class="main">
-    @if ($message = Session::get('success'))
+  <!--  @if ($message = Session::get('success'))
       <div class="alert alert-success">
         <p>{{$message}}</p>
       </div>
@@ -141,7 +141,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif -->
 
 <form action="<?php echo URL; ?>home/search" method="post">
 
@@ -282,14 +282,14 @@
 </div>
 
 
-@if(!empty($hotels))
+<?php if (isset($hotels)) {?>
 
-@if(!(count($hotels)>0))
+<?php if (count($hotels)<0) {?>
 <div class="alert alert-warning">
         <strong>No!</strong> Result Found .
     </div>
-@endif
-@foreach ($hotels as $hotel)
+<?php } ?>
+<?php foreach ($hotels as $hotel) { ?>
 <div class="widget-container center">
   <div class="card">
     <div class="card-top">
@@ -297,7 +297,7 @@
    <!-- @ foreach ($images as $image)-->
    <!--   @ if($hotel->Id_Hotel == $image->Id_Hotel)-->
    <!--  <div class="picture"> -->
-         <img  class="main-image" style="height: 259.188px; width: 461px"  src="{{url('uploads/'.$hotel->Path)}}">
+         <img  class="main-image" style="height: 259.188px; width: 461px"  src="<?php echo URL; ?>public/images/<?php if (isset($hotel->PathImage)) echo $hotel->PathImage; ?>">
   <!-- </div> -->
   <!--   @ endif-->
   <!-- @  endforeach-->
@@ -313,24 +313,24 @@
     <div class="card-description row">
       <div class="col-md-7">
         <div class="hotel-name">
-        Hotel : {{$hotel->Nom}}
+        Hotel : <?php if (isset($hotel->NomHotel)) echo $hotel->NomHotel; ?>
           <span class="stars">
-          @for($i = 1; $i < 6; $i++)
-            @if($i-1<$hotel->Type)
+         <?php for($i = 1; $i < 6; $i++){ ?>
+           <?php if($i-1<$hotel->TypeCat){?>
             <i class="fas fa-star"></i>
-            @else
+            <?php }else{ ?>
             <i class="far fa-star"></i>
-             @endif
-          @endfor
+            <?php } ?>
+            <?php } ?>
 
           </span>
         </div>
         <div class="hotel-location">
-        Location : {{$hotel->NomVille}}
+        Location : <?php if (isset($hotel->NomVille)) echo $hotel->NomVille; ?>
         </div>
         <br>
         <div class="hotel-name">
-       Price : {{$hotel->PrixTot}} DT
+       Price : <?php if (isset($hotel->PrixTot)) echo $hotel->PrixTot; ?> DT
         </div>
       </div>
       <!--
@@ -339,11 +339,10 @@
 
       <div class="col-md-5 center-vertically">
         <form id="reservation" action="{{ route('reservation') }}" method="post">
-        @csrf
 
-        <input type="hidden" name="hotel" value="{{ json_encode($hotel,TRUE)}}">
-        <input type="hidden" name="NbCh" value="{{ json_encode($NbCh,TRUE)}}">
-        <input type="hidden" name="Nb" value="{{ json_encode($Nb,TRUE)}}">
+        <input type="hidden" name="hotel" value="<?php json_encode($hotel,TRUE) ?>">
+        <input type="hidden" name="NbCh" value="<?php json_encode($NbCh,TRUE) ?>">
+        <input type="hidden" name="Nb" value="<?php json_encode($Nb,TRUE) ?>">
 
 
         <button class="book-button" onclick="return confirmation();" >BOOK NOW</button>
@@ -354,9 +353,9 @@
 </div>
 
 </div>
-@endforeach
+<?php } ?>
 
-@endif
+<?php } ?>
 <br><br>
 
 

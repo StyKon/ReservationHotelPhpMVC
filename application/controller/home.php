@@ -24,7 +24,8 @@ class Home extends Controller
     }
     public function search()
     {
-
+        if (isset($_POST["name"]))
+        {
         $cat = $_POST["category"];
         $vil = $_POST["ville"];
         if (($_POST["ville"]) == ("All Ville"))
@@ -43,8 +44,7 @@ class Home extends Controller
         print_r($name);
         print_r($adult);
         print_r($kids);
-        if (is_array($name))
-        {
+       
 
             for ($i = 0;$i < count($name);$i++)
             {
@@ -94,8 +94,6 @@ class Home extends Controller
             $homes_model = $this->loadModel('HomeModel');
             $hotels = $homes_model->getRecherche($NbPersonne, $etat, $vil, $cat, $p1, $p2, $p3, $p4);
             print_r($hotels);
-
-            $homes_model = $this->loadModel('HomeModel');
             $villes = $homes_model->getAllVilles();
             $categorys = $homes_model->getAllCategorys();
             require 'application/views/home/index.php';
@@ -109,6 +107,22 @@ class Home extends Controller
         }
 
     }
+
+    public function reservation()
+    {
+
+       $hoteljson= $_POST["hotel"];
+       $hotels = json_decode($hoteljson, true);
+       $NbChjson= $_POST["NbCh"];
+       $NbCh = json_decode($NbChjson, true);
+       $Nbjson= $_POST["Nb"];
+       $Nb = json_decode($Nbjson, true);
+       $client = $request->session()->get("ClientLogin")[0];
+       $value = object_get($client, 'Id_Client');
+
+
+    }
+
 
 }
 
