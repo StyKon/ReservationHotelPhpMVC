@@ -176,9 +176,9 @@
    <div class="main-search-input-item">
       <select name="ville" data-placeholder="All Categories" class="chosen-select">
          <option>All Ville</option>
-       <!--  @foreach ($villes as $ville)
-                                    <option value="{{$ville->Id_Ville}}">{{$ville->Nom}}</option>
-        @endforeach -->
+         <?php foreach ($villes as $ville) { ?>
+                                    <option value="<?php if (isset($ville->Id_Ville)) echo $ville->Id_Ville; ?>"><?php if (isset($ville->NomVille)) echo $ville->NomVille; ?></option>
+                                    <?php } ?>
       </select>
 
 
@@ -186,9 +186,9 @@
    <div class="main-search-input-item">
       <select name="category" data-placeholder="All Categories" class="chosen-select">
          <option>All Categories</option>
-        <!-- @foreach ($categorys as $category)
-                                    <option value="{{$category->Id_Category}}">{{$category->Type}}</option>
-                                @endforeach -->
+         <?php foreach ($categorys as $category) { ?>
+                                    <option value="<?php if (isset($category->Id_Category)) echo $category->Id_Category; ?>"><?php if (isset($category->TypeCat)) echo $category->TypeCat; ?></option>
+                                    <?php } ?>
       </select>
 
 

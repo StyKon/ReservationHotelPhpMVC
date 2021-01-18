@@ -7,6 +7,9 @@ class Home extends Controller
     {
         session_start();
         $_SESSION["Admin"] = true;
+        $homes_model = $this->loadModel('HomeModel');
+        $villes = $homes_model->getAllVilles();
+        $categorys = $homes_model->getAllCategorys();
 
         require 'application/views/home/index.php';
     }

@@ -49,6 +49,26 @@ class HomeModel
 
         return $query->fetchAll();//(PDO::FETCH_OBJ);
     }
+    public function getAllVilles()
+    {
+        $sql = "SELECT * FROM villes";
+        $query = $this
+            ->db
+            ->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+    public function getAllCategorys()
+    {
+        $sql = "SELECT * FROM categories";
+        $query = $this
+            ->db
+            ->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
   
 
 }
