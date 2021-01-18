@@ -91,7 +91,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/">Home</a></li>
+                            <li><a href="<?php echo URL; ?>">Home</a></li>
                             <li><a href="#top">Top</a></li>
                             <li><a href="#down">Down</a></li>
                         <!--    @if(session()->has('ClientLogin')) -->
@@ -99,8 +99,8 @@
                             <li><a href="/LogoutClient" class="btn btn-round btn-default">Logout</a></li>
 -->
                           <!--  @else-->
-                            <li><a href="/inscription" class="btn btn-round btn-default">Register</a></li>
-                            <li><a href="/login" class="btn btn-round btn-default">Login</a></li>
+                            <li><a href="<?php echo URL; ?>inscription" class="btn btn-round btn-default">Register</a></li>
+                            <li><a href="<?php echo URL; ?>login" class="btn btn-round btn-default">Login</a></li>
 
                           <!--  @endif-->
                         </ul>
@@ -338,11 +338,11 @@
        -->
 
       <div class="col-md-5 center-vertically">
-        <form id="reservation" action="{{ route('reservation') }}" method="post">
+        <form id="reservation" action="<?php echo URL; ?>home/reservation" method="post">
 
-        <input type="hidden" name="hotel" value="<?php json_encode($hotel,TRUE) ?>">
-        <input type="hidden" name="NbCh" value="<?php json_encode($NbCh,TRUE) ?>">
-        <input type="hidden" name="Nb" value="<?php json_encode($Nb,TRUE) ?>">
+        <input type="hidden" name="hotel" value="<?php echo htmlspecialchars(json_encode($hotel)); ?>">
+        <input type="hidden" name="NbCh" value="<?php echo htmlspecialchars(json_encode($NbCh)); ?>">
+        <input type="hidden" name="Nb" value="<?php echo htmlspecialchars(json_encode($Nb)); ?>">
 
 
         <button class="book-button" onclick="return confirmation();" >BOOK NOW</button>

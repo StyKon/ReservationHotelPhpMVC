@@ -26,25 +26,24 @@ class Home extends Controller
     {
         if (isset($_POST["name"]))
         {
-        $cat = $_POST["category"];
-        $vil = $_POST["ville"];
-        if (($_POST["ville"]) == ("All Ville"))
-        {
-            $vil = "";
-        }
+            $cat = $_POST["category"];
+            $vil = $_POST["ville"];
+            if (($_POST["ville"]) == ("All Ville"))
+            {
+                $vil = "";
+            }
 
-        if (($_POST["category"]) == ("All Categories"))
-        {
-            $cat = "";
-        }
-        $etat = "false";
-        $name = $_POST["name"];
-        $adult = $_POST["adult"];
-        $kids = $_POST["kids"];
-        print_r($name);
-        print_r($adult);
-        print_r($kids);
-       
+            if (($_POST["category"]) == ("All Categories"))
+            {
+                $cat = "";
+            }
+            $etat = "false";
+            $name = $_POST["name"];
+            $adult = $_POST["adult"];
+            $kids = $_POST["kids"];
+            print_r($name);
+            print_r($adult);
+            print_r($kids);
 
             for ($i = 0;$i < count($name);$i++)
             {
@@ -110,19 +109,50 @@ class Home extends Controller
 
     public function reservation()
     {
+        $hoteljson = $_POST["hotel"];
+        $hotels = json_decode($_POST["hotel"], true);
+        $NbChjson = $_POST["NbCh"];
+        $NbCh = json_decode($_POST["NbCh"], true);
+        $Nbjson = $_POST["Nb"];
+        $Nb = json_decode($_POST["Nb"], true);
+        print_r($hotels);
+        print_r($NbCh);
+        print_r($Nb);
+        $homes_model = $this->loadModel('HomeModel');
+        $Chambre1Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 1, $NbCh['NbCh1P']);
+        print_r($Chambre1Id);
+        if (!empty($Chambre1Id))
+        {
+            $Ch1 = $homes_model->UpdateChambreP($Chambre1Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre1Id);
+        }
+        $Chambre2Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 2, $NbCh['NbCh2P']);
+        if (!empty($Chambre2Id))
+        {
+            $Ch2 = $homes_model->UpdateChambreP($Chambre2Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre2Id);
+        }
+        $Chambre3Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 3, $NbCh['NbCh3P']);
+        if (!empty($Chambre3Id))
+        {
+            $Ch3 = $homes_model->UpdateChambreP($Chambre3Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre3Id);
+        }
+        $Chambre4Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 4, $NbCh['NbCh4P']);
+        if (!empty($Chambre4Id))
+        {
+            $Ch4 = $homes_model->UpdateChambreP($Chambre4Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre4Id);
+        }
 
-       $hoteljson= $_POST["hotel"];
-       $hotels = json_decode($hoteljson, true);
-       $NbChjson= $_POST["NbCh"];
-       $NbCh = json_decode($NbChjson, true);
-       $Nbjson= $_POST["Nb"];
-       $Nb = json_decode($Nbjson, true);
-       $client = $request->session()->get("ClientLogin")[0];
-       $value = object_get($client, 'Id_Client');
-
-
+        /*
+        return redirect()->route('welcome')
+        ->with('success', 'Reservation Done!!');
+        /*
+                  if authen name_user _ adr _ tel
+        
+        $request->session()->put('reservation', $table_id); */
     }
-
 
 }
 
