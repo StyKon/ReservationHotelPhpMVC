@@ -17,6 +17,19 @@ class Home extends Controller
     {
         require 'application/views/home/inscription.php';
     }
+    public function register()
+    {
+        if ($this->CheckLoginAdmin())
+        {
+            if (isset($_POST["submit_add_client"]))
+            {
+                $homes_model = $this->loadModel('HomeModel');
+                $homes_model->addClient($_POST["Civilite"], $_POST["Password"], $_POST["Nom"], $_POST["Prenom"], $_POST["Email"], $_POST["Mobile"], $_POST["Adresse"], $_POST["CodePostal"], $_POST["Ville"]);
+            }
+
+            header('location: ' . URL . 'home/inscription');
+        }
+    }
 
     public function myreservation()
     {
@@ -140,7 +153,7 @@ class Home extends Controller
             $Ch4 = $homes_model->UpdateChambreP($Chambre4Id);
             $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre4Id);
         }
-        
+
     }
 
 }

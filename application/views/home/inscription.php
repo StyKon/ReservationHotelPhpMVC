@@ -94,16 +94,16 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="#top">Top</a></li>
                             <li><a href="#down">Down</a></li>
-                            @if(session()->has('ClientLogin'))
+                             <!--  @if(session()->has('ClientLogin'))
                             <li><a href="/myreservation" >My Reservation</a></li>
 
                             <li><a href="/LogoutClient" class="btn btn-round btn-default">Logout</a></li>
 
-                            @else
+                            @else -->
                             <li><a href="/inscription" class="btn btn-round btn-default">Register</a></li>
                             <li><a href="/login" class="btn btn-round btn-default">Login</a></li>
 
-                            @endif
+                             <!--  @endif -->
                         </ul>
 
                     </div><!-- /.navbar-collapse -->
@@ -124,7 +124,7 @@
     </div>
 
     <div class="main">
-    @if ($message = Session::get('success'))
+     <!--  @if ($message = Session::get('success'))
       <div class="alert alert-success">
         <p>{{$message}}</p>
       </div>
@@ -143,14 +143,13 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif -->
     <div class="container tim-container">
 
 
     <div id="inputs">
         <center>
-            <form action="/inscription" method="post">
-            @csrf
+            <form action="<?php echo URL; ?>home/register" method="post">
                 <div class="tim-title">
                  <h3>Inscription</h3>
                 </div>
@@ -258,7 +257,7 @@
                 </div>
                 <div class="row tim-row">
                 <div class="col-md-6 col-sm-6">
-                        <button href="#fakelink" class="btn btn-block btn-lg btn-info btn-round">Inscription</button>
+                        <button href="#fakelink" name="submit_add_client" class="btn btn-block btn-lg btn-info btn-round">Inscription</button>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <cancel href="#fakelink" class="btn btn-block btn-lg btn-info btn-round">Annuler</cancel>

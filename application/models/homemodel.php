@@ -13,7 +13,36 @@ class HomeModel
             exit('Database connection could not be established.');
         }
     }
-
+    public function addClient($Civilite, $Password, $Nom, $Prenom, $Email, $Mobile, $Adresse, $CodePostal, $Ville)
+    {
+        // clean the input from javascript code for example
+        $Civilite = strip_tags($Civilite);
+        $Nom = strip_tags($Nom);
+        $Prenom = strip_tags($Prenom);
+        $Email = strip_tags($Email);
+        $Mobile = strip_tags($Mobile);
+        $Adresse = strip_tags($Adresse);
+        $CodePostal = strip_tags($CodePostal);
+        $Ville = strip_tags($Ville);
+        $Password= sha1(md5(sha1(md5($Password))));
+        $sql = "INSERT INTO clients (Civilite, Password, Nom,Prenom,Email,Mobile,Adresse,CodePostal,Ville) VALUES ( :Civilite,  :Password, :Nom, :Prenom, :Email, :Mobile, :Adresse, :CodePostal, :Ville)";
+      
+            $query = $this
+                ->db
+                ->prepare($sql);
+            $query->execute(array(
+                ':Civilite' => $Civilite,
+                ':Password' => $Password,
+                ':Nom' => $Nom,
+                ':Prenom' => $Prenom,
+                ':Email' => $Email,
+                ':Mobile' => $Mobile,
+                ':Adresse' => $Adresse,
+                ':CodePostal' => $CodePostal,
+                ':Ville' => $Ville
+            ));
+       
+    }
     public function getRecherche($NbPersonne, $etat, $vil, $cat, $p1, $p2, $p3, $p4)
     {
         $sql = "SELECT hotels.Id_Hotel, hotels.Id_Category, hotels.Id_Ville, hotels.NomHotel,
