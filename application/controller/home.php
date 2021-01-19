@@ -13,11 +13,25 @@ class Home extends Controller
 
     public function inscription()
     {
-        require 'application/views/home/inscription.php';
+        session_start();
+        if (isset($_SESSION['client']))
+        {
+            header('location: ' . URL . '');
+        }
+        else
+        {
+            require 'application/views/home/inscription.php';
+        }  
+        
     }
     public function register()
     {
-        if ($this->CheckLoginAdmin())
+        session_start();
+        if (isset($_SESSION['client']))
+        {
+            header('location: ' . URL . '');
+        }
+        else
         {
             if (isset($_POST["submit_add_client"]))
             {
@@ -26,12 +40,28 @@ class Home extends Controller
             }
 
             header('location: ' . URL . 'home/inscription');
-        }
+        }  
     }
 
     public function myreservation()
     {
+        if ($this->CheckLoginClient())
+        {
+            $homes_model = $this->loadModel('HomeModel');
+            $reservations= $homes_model->myReservation($_SESSION['client']->Id_Client);
+    
         require 'application/views/home/myreservation.php';
+        }
+    }
+    public function annulerreservation($Id_Reservation,$Id_Chambre)
+    {
+        if ($this->CheckLoginClient())
+        {
+            $homes_model = $this->loadModel('HomeModel');
+            $reservations= $homes_model->AnnulerReservation($Id_Reservation);
+            $homes_model->UpdateChambreAfterCancelReservation($Id_Chambre);
+            header('location: ' . URL . 'home/myreservation');
+        }
     }
     public function search()
     {
@@ -125,9 +155,6 @@ class Home extends Controller
             $NbCh = json_decode($_POST["NbCh"], true);
             $Nbjson = $_POST["Nb"];
             $Nb = json_decode($_POST["Nb"], true);
-            print_r($hotels);
-            print_r($NbCh);
-            print_r($Nb);
             $homes_model = $this->loadModel('HomeModel');
             $Chambre1Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 1, $NbCh['NbCh1P']);
             print_r($Chambre1Id);
@@ -154,7 +181,7 @@ class Home extends Controller
                 $Ch4 = $homes_model->UpdateChambreP($Chambre4Id);
                 $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $_SESSION['client']->Id_Client, $hotels['Id_Hotel'], $Chambre4Id);
             }
-
+            header('location: ' . URL . '');
         }
     }
 

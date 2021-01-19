@@ -91,19 +91,18 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="<?php echo URL; ?>">Home</a></li>
+                        <li><a href="<?php echo URL; ?>">Home</a></li>
                             <li><a href="#top">Top</a></li>
                             <li><a href="#down">Down</a></li>
                             <?php if (isset($_SESSION['client'])) {?>
-                            <li><a href="/myreservation" >My Reservation</a></li>
-
+                           <li><a href="<?php echo URL; ?>home/myreservation" >My Reservation</a></li>
                             <li><a href="<?php echo URL; ?>login/logout" class="btn btn-round btn-default">Logout</a></li>
 
-                           <?php }else{ ?>
-                            <li><a href="<?php echo URL; ?>inscription" class="btn btn-round btn-default">Register</a></li>
+                            <?php }else{ ?>
+                            <li><a href="<?php echo URL; ?>home/inscription" class="btn btn-round btn-default">Register</a></li>
                             <li><a href="<?php echo URL; ?>login" class="btn btn-round btn-default">Login</a></li>
 
-                             <?php } ?>
+                            <?php } ?>
                         </ul>
 
                     </div><!-- /.navbar-collapse -->
@@ -124,7 +123,7 @@
     </div>
 
     <div class="main">
-    @if ($message = Session::get('success'))
+  <!--  @if ($message = Session::get('success'))
       <div class="alert alert-success">
         <p>{{$message}}</p>
       </div>
@@ -143,7 +142,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif -->
     <div class="container tim-container">
 
 
@@ -177,17 +176,17 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                @foreach ($reservations as $reservation)
+                <?php foreach ($reservations as $reservation) { ?>
                   <tr>
-                    <td>{{ $loop->index+1 }}.</td>
-                    <td>{{$reservation->DateDebut}}</td>
-                    <td>{{$reservation->DateFin}}</td>
-                    <td>{{$reservation->hotel->Nom}}</td>
+                    <td><?php if (isset($reservation->Id_Reservation)) echo $reservation->Id_Reservation; ?></td>
+                    <td><?php if (isset($reservation->DateDebut)) echo $reservation->DateDebut; ?></td>
+                    <td><?php if (isset($reservation->DateFin)) echo $reservation->DateFin; ?></td>
+                    <td><?php if (isset($reservation->NomHotel)) echo $reservation->NomHotel; ?></td>
                     <td class="td-actions text-right">
-<form action="{{ URL::route('annulerreservation',[$reservation->Id_Reservation,$reservation->Id_Chambre]) }}" method="post">
+<form action="<?php echo URL . 'home/annulerreservation/' . $reservation->Id_Reservation .'/'. $reservation->Id_Chambre ; ?>" method="post">
 
-@csrf
-                        @method('DELETE')
+
+                        
 <button style="margin-top: 0px;height:30px;padding-top: 4px;" onclick="return confirmation();" class="btn btn-danger">Cancel Reservation</button>
 
 </form>
@@ -196,7 +195,7 @@
 
 
                   </tr>
-                  @endforeach
+                  <?php } ?>
                 </tbody>
               </table>
             </div>

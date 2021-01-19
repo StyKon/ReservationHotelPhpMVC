@@ -130,6 +130,22 @@ class HomeModel
                 $query->execute();
         }
     }
+    public function myReservation($Id_Client)
+    {
+        $sql = "SELECT reservations.Id_Reservation,reservations.DateDebut
+        ,reservations.DateFin,reservations.Id_Chambre,hotels.NomHotel 
+        FROM reservations 
+        INNER JOIN hotels ON hotels.Id_Hotel = reservations.Id_Hotel  
+        WHERE Id_Client = :Id_Client ";
+        $query = $this
+            ->db
+            ->prepare($sql);
+        $query->bindParam(':Id_Client', $Id_Client);
+        $query->execute();
+
+        return $query->fetchAll(); //(PDO::FETCH_OBJ);
+        
+    }
     
     public function getAllVilles()
     {
@@ -150,6 +166,28 @@ class HomeModel
         $query->execute();
 
         return $query->fetchAll();
+    }
+    public function AnnulerReservation($Id_Reservation)
+    {
+        $Id_Reservation = strip_tags($Id_Reservation);
+        $sql = "DELETE FROM reservations WHERE Id_Reservation = :Id_Reservation";
+        $query = $this
+            ->db
+            ->prepare($sql);
+        $query->execute(array(
+            ':Id_Reservation' => $Id_Reservation
+        ));
+    }
+    public function UpdateChambreAfterCancelReservation($Id_Chambre)
+    {
+        $sql = "UPDATE chambres set Etat='false' WHERE Id_Chambre = :Id_Chambre ";
+     
+            $query = $this
+                ->db
+                ->prepare($sql);
+            $query->bindParam(':Id_Chambre',$Id_Chambre);
+            $query->execute();
+       
     }
 
 }
