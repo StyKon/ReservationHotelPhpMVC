@@ -31,6 +31,21 @@ class LoginModel
 
         return $query->fetch(PDO::FETCH_OBJ);
     }
+    public function LoginAdmin($Login,$Password)
+    {
+        $Login = strip_tags($Login);
+        $Password= sha1(md5(sha1(md5($Password))));
+        $sql = "SELECT Nom,Prenom,Login FROM administrateurs WHERE Login=:Login AND Password=:Password";
+        $query = $this
+            ->db
+            ->prepare($sql);
+        $query->execute(array(
+            ':Login' => $Login,
+            ':Password' => $Password
+        ));
+
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
     
 
 }

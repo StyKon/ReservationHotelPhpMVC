@@ -91,7 +91,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/">Home</a></li>
+                            <li><a href="<?php echo URL; ?>">Home</a></li>
                             <li><a href="#top">Top</a></li>
                             <li><a href="#down">Down</a></li>
                            <?php if (isset($_SESSION['client'])) {?>
@@ -100,8 +100,8 @@
                             <li><a href="<?php echo URL; ?>login/logout" class="btn btn-round btn-default">Logout</a></li>
 
                           <?php }else{ ?>
-                            <li><a href="/inscription" class="btn btn-round btn-default">Register</a></li>
-                            <li><a href="/login" class="btn btn-round btn-default">Login</a></li>
+                            <li><a href="<?php echo URL; ?>inscription" class="btn btn-round btn-default">Register</a></li>
+                            <li><a href="<?php echo URL; ?>login" class="btn btn-round btn-default">Login</a></li>
 
                             <?php } ?>
                         </ul>

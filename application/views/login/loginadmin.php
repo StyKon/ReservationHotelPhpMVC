@@ -92,8 +92,8 @@
               <div class="text-center text-muted mb-4">
                 <small>Or sign in with credentials</small>
               </div>
-              <form  class="wrap-form-reservation size22 m-l-r-auto" method="post" action="/login1">
-            @csrf
+              <form  class="wrap-form-reservation size22 m-l-r-auto" method="post" action="<?php echo URL; ?>login/loginadmin">
+           
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
@@ -117,7 +117,7 @@
                   </label>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary my-4">Sign in</button>
+                  <button type="submit" name="submit_login_admin" class="btn btn-primary my-4">Sign in</button>
                 </div>
               </form>
             </div>

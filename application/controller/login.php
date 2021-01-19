@@ -25,14 +25,34 @@ class Login extends Controller
         }
     }
 
-    /**
-     * PAGE: exampleone
-     * This method handles what happens when you move to http://yourproject/home/exampleone
-     * The camelCase writing is just for better readability. The method name is case insensitive.
-     */
+    public function admin()
+    {
+        if (isset($_SESSION['admin']))
+        {
+            header('location: ' . URL . 'chambre');
+        }
+        else
+        {
+            header('location: ' . URL . 'login/admin');
+        }
+    }
     public function loginadmin()
     {
-        require 'application/views/login/loginadmin.php';
+        if (isset($_POST["submit_login_admin"]))
+        {
+            $logins_model = $this->loadModel('LoginModel');
+            $admin = $logins_model->LoginAdmin($_POST["Login"], $_POST["Password"]);
+            if (!empty($admin))
+            {
+                session_start();
+                $_SESSION['admin'] = $admin;
+                header('location: ' . URL . 'category');
+            }
+            else
+            {
+                header('location: ' . URL . 'login/admin');
+            }
+        }
     }
 
     public function loginclient()
@@ -41,7 +61,7 @@ class Login extends Controller
         {
             $logins_model = $this->loadModel('LoginModel');
             $client = $logins_model->LoginClient($_POST["Civilite"], $_POST["Password"]);
-            if (count($client) > 0)
+            if (!empty($client))
             {
                 session_start();
                 $_SESSION['client'] = $client;
@@ -49,7 +69,7 @@ class Login extends Controller
             }
             else
             {
-                require 'application/views/login/login.php';
+                header('location: ' . URL . 'login');
             }
         }
 

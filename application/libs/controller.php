@@ -22,13 +22,13 @@ class Controller
     public function CheckLoginAdmin()
     {
         session_start();
-        if (isset($_SESSION['Admin']))
+        if (isset($_SESSION['admin']))
         {
             return true;
         }
         else
         {
-            header('location: ' . URL . 'ss');
+            header('location: ' . URL . 'login/admin');
         }
     }
     public function CheckLoginClient()

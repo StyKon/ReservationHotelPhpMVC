@@ -5,7 +5,6 @@ class Home extends Controller
     public function index()
     {
         session_start();
-        $_SESSION["Admin"] = true;
         $homes_model = $this->loadModel('HomeModel');
         $villes = $homes_model->getAllVilles();
         $categorys = $homes_model->getAllCategorys();
