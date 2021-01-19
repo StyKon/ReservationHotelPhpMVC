@@ -94,16 +94,16 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="#top">Top</a></li>
                             <li><a href="#down">Down</a></li>
-                             <!--  @if(session()->has('ClientLogin'))
+                              <?php if (isset($_SESSION['client'])) {?>
                             <li><a href="/myreservation" >My Reservation</a></li>
 
-                            <li><a href="/LogoutClient" class="btn btn-round btn-default">Logout</a></li>
+                            <li><a href="<?php echo URL; ?>login/logout" class="btn btn-round btn-default">Logout</a></li>
 
-                            @else -->
+                         <?php }else{ ?>
                             <li><a href="/inscription" class="btn btn-round btn-default">Register</a></li>
                             <li><a href="/login" class="btn btn-round btn-default">Login</a></li>
 
-                             <!--  @endif -->
+                                <?php } ?>
                         </ul>
 
                     </div><!-- /.navbar-collapse -->

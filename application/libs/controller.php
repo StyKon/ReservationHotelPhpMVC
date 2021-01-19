@@ -50,14 +50,11 @@ class Controller
     public function CheckLoginClient()
     {
         session_start();
-        if (isset($_SESSION['Client']))
+        if (isset($_SESSION['client']))
         {
             return true;
         }
-        else
-        {
-            header('location: ' . URL . 'ss'); 
-        }
+      
     }
     public function loadModel($model_name)
     {

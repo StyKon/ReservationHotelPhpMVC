@@ -9,7 +9,6 @@ class Home extends Controller
         $homes_model = $this->loadModel('HomeModel');
         $villes = $homes_model->getAllVilles();
         $categorys = $homes_model->getAllCategorys();
-
         require 'application/views/home/index.php';
     }
 
@@ -37,6 +36,7 @@ class Home extends Controller
     }
     public function search()
     {
+        session_start();
         if (isset($_POST["name"]))
         {
             $cat = $_POST["category"];
@@ -118,6 +118,7 @@ class Home extends Controller
 
     public function reservation()
     {
+        session_start();
         $hoteljson = $_POST["hotel"];
         $hotels = json_decode($_POST["hotel"], true);
         $NbChjson = $_POST["NbCh"];
@@ -133,25 +134,25 @@ class Home extends Controller
         if (!empty($Chambre1Id))
         {
             $Ch1 = $homes_model->UpdateChambreP($Chambre1Id);
-            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre1Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $_SESSION['client']->Id_Client , $hotels['Id_Hotel'], $Chambre1Id);
         }
         $Chambre2Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 2, $NbCh['NbCh2P']);
         if (!empty($Chambre2Id))
         {
             $Ch2 = $homes_model->UpdateChambreP($Chambre2Id);
-            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre2Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $_SESSION['client']->Id_Client , $hotels['Id_Hotel'], $Chambre2Id);
         }
         $Chambre3Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 3, $NbCh['NbCh3P']);
         if (!empty($Chambre3Id))
         {
             $Ch3 = $homes_model->UpdateChambreP($Chambre3Id);
-            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre3Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $_SESSION['client']->Id_Client , $hotels['Id_Hotel'], $Chambre3Id);
         }
         $Chambre4Id = $homes_model->getChambreNb($hotels['Id_Hotel'], 4, $NbCh['NbCh4P']);
         if (!empty($Chambre4Id))
         {
             $Ch4 = $homes_model->UpdateChambreP($Chambre4Id);
-            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $Id_Client, $hotels['Id_Hotel'], $Chambre4Id);
+            $Reservation = $homes_model->addReservation($Nb['DateDebut'], $Nb['DateFin'], $_SESSION['client']->Id_Client , $hotels['Id_Hotel'], $Chambre4Id);
         }
 
     }

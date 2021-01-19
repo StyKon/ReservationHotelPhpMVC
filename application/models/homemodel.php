@@ -122,16 +122,15 @@ class HomeModel
             $query = $this
                 ->db
                 ->prepare($sql);
-            $query->execute(array(
-                ':DateDebut' => $DateDebut,
-                ':DateFin' => $DateFin,
-                ':Id_Client' => $Id_Client,
-                ':Id_Hotel' => $Id_Hotel,
-                ':Id_Chambre' => $Id_Chambr
-            ));
+                $query->bindParam(':DateDebut', $DateDebut);
+                $query->bindParam(':DateFin', $DateFin);
+                $query->bindParam(':Id_Client', $Id_Client);
+                $query->bindParam(':Id_Hotel', $Id_Hotel);
+                $query->bindParam(':Id_Chambre', $Id_Chambr->Id_Chambre);
+                $query->execute();
         }
     }
-
+    
     public function getAllVilles()
     {
         $sql = "SELECT * FROM villes";

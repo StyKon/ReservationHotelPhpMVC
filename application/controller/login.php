@@ -16,10 +16,12 @@ class Login extends Controller
      */
     public function index()
     {
-        session_start() ;
-        $_SESSION["Admin"] = true;
-      
-        require 'application/views/login/login.php';
+        if ($this->CheckLoginClient())
+        {
+            header('location: ' . URL . '');
+        }else{
+            require 'application/views/login/login.php';
+        }
     }
 
     /**
@@ -30,6 +32,29 @@ class Login extends Controller
     public function loginadmin()
     {
         require 'application/views/login/loginadmin.php';
+    }
+
+    public function loginclient()
+    {
+        if (isset($_POST["submit_login_client"]))
+        {
+        $logins_model = $this->loadModel('LoginModel');
+        $client=$logins_model->LoginClient($_POST["Civilite"], $_POST["Password"]);
+        if (count($client)>0){
+            session_start();
+            $_SESSION['client'] = $client;
+            header('location: ' . URL . '');
+        }else{
+            require 'application/views/login/login.php';
+        }
+        }
+        
+    }
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        header('location: ' . URL . '');
     }
 
    

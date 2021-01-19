@@ -94,16 +94,16 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="#top">Top</a></li>
                             <li><a href="#down">Down</a></li>
-                            @if(session()->has('ClientLogin'))
+                           <?php if (isset($_SESSION['client'])) {?>
                             <li><a href="/myreservation" >My Reservation</a></li>
 
-                            <li><a href="/LogoutClient" class="btn btn-round btn-default">Logout</a></li>
+                            <li><a href="<?php echo URL; ?>login/logout" class="btn btn-round btn-default">Logout</a></li>
 
-                            @else
+                          <?php }else{ ?>
                             <li><a href="/inscription" class="btn btn-round btn-default">Register</a></li>
                             <li><a href="/login" class="btn btn-round btn-default">Login</a></li>
 
-                            @endif
+                            <?php } ?>
                         </ul>
 
                     </div><!-- /.navbar-collapse -->
@@ -129,8 +129,7 @@
 
     <div id="inputs">
         <center>
-            <form action="/login" method="post">
-            @csrf
+            <form action="<?php echo URL; ?>login/loginclient" method="post">
                 <div class="tim-title">
                  <h3>Login</h3>
                 </div>
@@ -155,7 +154,7 @@
 
                 <div class="row tim-row">
                 <div class="col-md-6 col-sm-6">
-                        <button href="#fakelink" class="btn btn-block btn-lg btn-info btn-round">Login</button>
+                        <button href="#fakelink" name="submit_login_client" class="btn btn-block btn-lg btn-info btn-round">Login</button>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <button href="#fakelink" class="btn btn-block btn-lg btn-info btn-round">Cancel</button>
