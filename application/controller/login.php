@@ -15,6 +15,7 @@ class Login extends Controller
      */
     public function index()
     {
+        session_start();
         if (isset($_SESSION['client']))
         {
             header('location: ' . URL . '');
@@ -27,17 +28,19 @@ class Login extends Controller
 
     public function admin()
     {
+        session_start();
         if (isset($_SESSION['admin']))
         {
             header('location: ' . URL . 'chambre');
         }
         else
         {
-            header('location: ' . URL . 'login/admin');
+            require 'application/views/login/loginadmin.php';
         }
     }
     public function loginadmin()
     {
+        session_start();
         if (isset($_POST["submit_login_admin"]))
         {
             $logins_model = $this->loadModel('LoginModel');
@@ -57,6 +60,7 @@ class Login extends Controller
 
     public function loginclient()
     {
+        session_start();
         if (isset($_POST["submit_login_client"]))
         {
             $logins_model = $this->loadModel('LoginModel');
