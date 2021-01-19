@@ -63,7 +63,7 @@
                     <td><?php if (isset($chambre->NbPlace)) echo $chambre->NbPlace; ?></td>
                     <td><?php if (isset($chambre->Prix)) echo $chambre->Prix; ?></td>
                     <td><?php if (isset($chambre->Etat)) echo $chambre->Etat; ?></td>
-                    <td><?php if (isset($chambre->Id_Hotel)) echo $chambre->Id_Hotel; ?></td>
+                    <td><?php if (isset($chambre->NomHotel)) echo $chambre->NomHotel; ?></td>
                     <td class="td-actions text-right">
 
 <a href="<?php echo URL . 'chambre/edit/' . $chambre->Id_Chambre; ?>" class="table-action" data-toggle="tooltip" data-original-title="Edit Chambre">

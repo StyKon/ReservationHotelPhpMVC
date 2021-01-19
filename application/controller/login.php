@@ -47,7 +47,6 @@ class Login extends Controller
             $admin = $logins_model->LoginAdmin($_POST["Login"], $_POST["Password"]);
             if (!empty($admin))
             {
-                session_start();
                 $_SESSION['admin'] = $admin;
                 header('location: ' . URL . 'category');
             }

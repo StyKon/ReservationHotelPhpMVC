@@ -16,7 +16,8 @@ class ImageModel
 
     public function getAllImages()
     {
-        $sql = "SELECT * FROM images";
+        $sql = "SELECT images.Id_Image,images.NomImage,images.PathImage,images.Id_Hotel,
+        hotels.NomHotel FROM images INNER JOIN hotels ON hotels.Id_Hotel = images.Id_Hotel";
         $query = $this
             ->db
             ->prepare($sql);

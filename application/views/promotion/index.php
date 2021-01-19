@@ -62,7 +62,7 @@
                     <td><?php if (isset($promotion->DateDeb	)) echo $promotion->DateDeb	; ?></td>
                     <td><?php if (isset($promotion->DateFin)) echo $promotion->DateFin; ?></td>
                     <td><?php if (isset($promotion->Remise)) echo $promotion->Remise; ?></td>
-                    <td><?php if (isset($promotion->Id_Hotel)) echo $promotion->Id_Hotel; ?></td>
+                    <td><?php if (isset($promotion->NomHotel)) echo $promotion->NomHotel; ?></td>
                     <td class="td-actions text-right">
 
 <a href="<?php echo URL . 'promotion/edit/' . $promotion->Id_Promotion; ?>" class="table-action" data-toggle="tooltip" data-original-title="Edit Promotion">

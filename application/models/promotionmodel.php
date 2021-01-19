@@ -16,7 +16,9 @@ class PromotionModel
 
     public function getAllPromotions()
     {
-        $sql = "SELECT * FROM promotions";
+        $sql = "SELECT promotions.Id_Promotion,promotions.DateDeb,promotions.DateFin,
+        promotions.Remise,promotions.Id_Hotel,hotels.NomHotel FROM promotions 
+        INNER JOIN hotels ON hotels.Id_Hotel = promotions.Id_Hotel";
         $query = $this
             ->db
             ->prepare($sql);

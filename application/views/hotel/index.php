@@ -58,8 +58,8 @@
                   <tr>
                     <td><?php if (isset($hotel->Id_Hotel)) echo $hotel->Id_Hotel; ?></td>
                     <td><?php if (isset($hotel->NomHotel)) echo $hotel->NomHotel; ?></td>
-                    <td><?php if (isset($hotel->Id_Ville)) echo $hotel->Id_Ville; ?></td>
-                    <td><?php if (isset($hotel->Id_Category)) echo $hotel->Id_Category; ?></td>
+                    <td><?php if (isset($hotel->NomVille)) echo $hotel->NomVille; ?></td>
+                    <td><?php if (isset($hotel->TypeCat)) echo $hotel->TypeCat; ?></td>
                     <td class="td-actions text-right">
 
 <a href="<?php echo URL . 'hotel/edit/' . $hotel->Id_Hotel; ?>" class="table-action" data-toggle="tooltip" data-original-title="Edit Hotel">

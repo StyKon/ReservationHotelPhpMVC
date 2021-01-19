@@ -61,7 +61,7 @@
                   <td>  <img src="<?php echo URL; ?>public/images/<?php if (isset($image->PathImage)) echo $image->PathImage; ?>" alt=""  class="responsive-img left"  width="50" height="50">
 </td>
 
-                    <td><?php if (isset($image->Id_Hotel)) echo $image->Id_Hotel; ?></td>
+                    <td><?php if (isset($image->NomHotel)) echo $image->NomHotel; ?></td>
                     <td class="td-actions text-right">
 
 <a href="<?php echo URL . 'image/edit/' . $image->Id_Image; ?>" class="table-action" data-toggle="tooltip" data-original-title="Edit Image">

@@ -15,7 +15,10 @@ class HotelModel
 
     public function getAllHotels()
     {
-        $sql = "SELECT * FROM hotels";
+        $sql = "SELECT hotels.Id_Hotel,hotels.NomHotel,hotels.Id_Ville,hotels.Id_Category,
+        categories.TypeCat,villes.NomVille FROM hotels  
+        INNER JOIN categories ON hotels.Id_Category = categories.Id_Category 
+        INNER JOIN villes ON hotels.Id_Ville = villes.Id_Ville ";
         $query = $this
             ->db
             ->prepare($sql);

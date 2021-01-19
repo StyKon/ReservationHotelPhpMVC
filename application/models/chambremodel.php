@@ -15,7 +15,8 @@ class ChambreModel
 
     public function getAllChambres()
     {
-        $sql = "SELECT * FROM chambres";
+        $sql = "SELECT chambres.Id_Chambre,chambres.Num,chambres.NbPlace,chambres.Prix
+        ,chambres.Etat,chambres.Id_Hotel,hotels.NomHotel FROM chambres INNER JOIN hotels ON hotels.Id_Hotel = chambres.Id_Hotel ";
         $query = $this
             ->db
             ->prepare($sql);
