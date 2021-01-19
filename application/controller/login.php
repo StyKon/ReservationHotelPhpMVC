@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class Home
  *
@@ -16,10 +15,12 @@ class Login extends Controller
      */
     public function index()
     {
-        if ($this->CheckLoginClient())
+        if (isset($_SESSION['client']))
         {
             header('location: ' . URL . '');
-        }else{
+        }
+        else
+        {
             require 'application/views/login/login.php';
         }
     }
@@ -38,17 +39,20 @@ class Login extends Controller
     {
         if (isset($_POST["submit_login_client"]))
         {
-        $logins_model = $this->loadModel('LoginModel');
-        $client=$logins_model->LoginClient($_POST["Civilite"], $_POST["Password"]);
-        if (count($client)>0){
-            session_start();
-            $_SESSION['client'] = $client;
-            header('location: ' . URL . '');
-        }else{
-            require 'application/views/login/login.php';
+            $logins_model = $this->loadModel('LoginModel');
+            $client = $logins_model->LoginClient($_POST["Civilite"], $_POST["Password"]);
+            if (count($client) > 0)
+            {
+                session_start();
+                $_SESSION['client'] = $client;
+                header('location: ' . URL . '');
+            }
+            else
+            {
+                require 'application/views/login/login.php';
+            }
         }
-        }
-        
+
     }
     public function logout()
     {
@@ -57,6 +61,5 @@ class Login extends Controller
         header('location: ' . URL . '');
     }
 
-   
-   
 }
+

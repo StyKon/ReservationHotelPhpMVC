@@ -175,7 +175,7 @@
                 </div>
 
                 <div class="dropdown-divider"></div>
-                <a href="/LogoutAdmin" class="dropdown-item">
+                <a href="<?php echo URL; ?>login/logout" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>
